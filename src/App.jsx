@@ -1,8 +1,8 @@
 import "./App.css";
-import Gps from "./Gps";
+import DefaltMap from "./DefaltMap";
 
 function App() {
-  return <Gps />;
+  return <DefaltMap />;
 }
 
 export default App;
