@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 
 import { Map, View } from "ol";
 import TileLayer from "ol/layer/Tile";
-import { OSM, StadiaMaps } from "ol/source";
+import { StadiaMaps } from "ol/source";
 import { fromLonLat } from "ol/proj";
 
 function DefaltMap() {
