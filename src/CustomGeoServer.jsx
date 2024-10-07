@@ -18,10 +18,10 @@ export default function CustomGeoServer() {
         }),
         new TileLayer({
           source: new TileWMS({
-            url: "http://172.30.1.72:8082/geoserver/tutorial/wms?service=WMS",
+            url: "http://172.30.1.72:8082/geoserver/tutorial/wms",
             params: {
-              LAYERS: "nurc:Img_Sample",
-              TILED: true,
+              layers: "TL_SCCO_CTPRVN",
+              formate: "image/png",
             },
             serverType: "geoserver",
           }),
@@ -51,3 +51,5 @@ export default function CustomGeoServer() {
     </div>
   );
 }
+
+// http://172.30.1.72:8082/geoserver/tutorial/wms?REQUEST=GetMap&SERVICE=WMS&VERSION=1.3.0&FORMAT=image%2Fpng&STYLES=&TRANSPARENT=true&layers=nurc%3AImg_Sample&formate=image%2Fpng&request=GetMap&FORMAT_OPTIONS=dpi%3A180&WIDTH=512&HEIGHT=512&CRS=EPSG%3A3857&BBOX=12523442.714243278%2C2504688.542848654%2C13775786.985667605%2C3757032.814272982
