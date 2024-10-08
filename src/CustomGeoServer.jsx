@@ -1,9 +1,13 @@
 import { useEffect, useRef } from "react";
 import { Map, View } from "ol";
 import TileLayer from "ol/layer/Tile";
-import { ImageStatic, OSM, TileWMS } from "ol/source";
-import { fromLonLat } from "ol/proj";
-import ImageLayer from "ol/layer/Image";
+import { OSM, TileWMS } from "ol/source";
+import GeoJSON from "ol/format/GeoJSON.js";
+import VectorLayer from "ol/layer/Vector";
+import VectorSource from "ol/source/Vector";
+import Style from "ol/style/Style";
+import Stroke from "ol/style/Stroke";
+import Fill from "ol/style/Fill";
 
 export default function CustomGeoServer() {
   const mapRef = useRef(null);
@@ -16,14 +20,29 @@ export default function CustomGeoServer() {
           source: new OSM(),
           opacity: 1,
         }),
-        new TileLayer({
-          source: new TileWMS({
-            url: "http://172.30.1.72:8082/geoserver/tutorial/wms",
-            params: {
-              layers: "TL_SCCO_CTPRVN",
-              formate: "image/png",
-            },
-            serverType: "geoserver",
+        // new TileLayer({
+        //   source: new TileWMS({
+        //     url: "http://172.30.1.72:8082/geoserver/tutorial/wms",
+        //     params: {
+        //       layers: "uzbekistan_Districts_level_2",
+        //       formate: "image/png",
+        //     },
+        //     serverType: "geoserver",
+        //   }),
+        // }),
+        new VectorLayer({
+          source: new VectorSource({
+            format: new GeoJSON(),
+            url: "http://172.30.1.72:8082/geoserver/tutorial/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=tutorial%3ALARD_ADM_SECT_SGG_50_202405&maxFeatures=50&outputFormat=application/json",
+            style: new Style({
+              stroke: new Stroke({
+                color: "rgba(0, 0, 255, 1.0)",
+                width: 5,
+              }),
+              fill: new Fill({
+                color: "rgba(0, 0, 255, 0.4)",
+              }),
+            }),
           }),
         }),
       ],
@@ -44,7 +63,7 @@ export default function CustomGeoServer() {
       <div
         ref={mapRef}
         style={{
-          height: "400px",
+          height: "900px",
           width: "100%",
         }}
       />
